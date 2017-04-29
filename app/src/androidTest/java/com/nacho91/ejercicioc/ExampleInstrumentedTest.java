@@ -1,4 +1,4 @@
-package ejercicioc.nacho91.com.ejercicioc;
+package com.nacho91.ejercicioc;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

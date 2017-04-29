@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="ejercicioc.nacho91.com.ejercicioc">
+    package="com.nacho91.ejercicioc.ejercicioc">
 
     <application
         android:allowBackup="true"
