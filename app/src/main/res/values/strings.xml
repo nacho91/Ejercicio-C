@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Ejercicio C</string>
+
+    <string name="amount_label">Ingrese un monto</string>
+    <string name="amount_error">El monto ingresado es invalido</string>
+    <string name="amount_next_button">Siguiente</string>
 </resources>
