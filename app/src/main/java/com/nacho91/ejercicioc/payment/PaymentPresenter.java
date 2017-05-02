@@ -63,15 +63,12 @@ public class PaymentPresenter {
 
         cacheManager.savePaymentMethod(paymentMethod);
 
-        if(isCreditCardMethod(paymentMethod)){
+        if(paymentMethod.isCreditCard()){
             view.goBankScreen();
             return;
         }
 
         view.finishProcess();
     }
-
-    private boolean isCreditCardMethod(PaymentMethod paymentMethod){
-        return paymentMethod.getTypeId().equalsIgnoreCase("credit_card");
-    }
+    
 }

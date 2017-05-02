@@ -51,4 +51,8 @@ public class PaymentMethod {
     public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
+
+    public boolean isCreditCard(){
+        return typeId.equalsIgnoreCase("credit_card");
+    }
 }

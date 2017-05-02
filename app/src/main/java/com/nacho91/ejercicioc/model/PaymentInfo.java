@@ -47,4 +47,5 @@ public class PaymentInfo {
     public void setPayerCost(PayerCost payerCost) {
         this.payerCost = payerCost;
     }
+
 }

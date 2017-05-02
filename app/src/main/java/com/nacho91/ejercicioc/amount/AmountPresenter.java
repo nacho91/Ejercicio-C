@@ -36,12 +36,12 @@ public class AmountPresenter {
 
         StringBuilder mesage = new StringBuilder();
 
-        mesage.append("Monto ").append(info.getAmount()).append("\n");
-        mesage.append("Medio de pago ").append(info.getPaymentMethod().getName()).append("\n");
+        mesage.append("Monto: ").append(info.getAmount()).append("\n");
+        mesage.append("Medio de pago: ").append(info.getPaymentMethod().getName()).append("\n");
 
-        if(info.getPaymentMethod().getTypeId().equalsIgnoreCase("credit_card")){
-            mesage.append("Banco ").append(info.getCardIssuer().getName()).append("\n");
-            mesage.append("Cuotas ").append(info.getPayerCost().getRecommendedMessage()).append("\n");
+        if(info.getPaymentMethod().isCreditCard()){
+            mesage.append("Banco: ").append(info.getCardIssuer().getName()).append("\n");
+            mesage.append("Cuotas: ").append(info.getPayerCost().getRecommendedMessage()).append("\n");
         }
 
         return mesage.toString();
