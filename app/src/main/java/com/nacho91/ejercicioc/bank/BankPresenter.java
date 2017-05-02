@@ -54,6 +54,10 @@ public class BankPresenter {
 
                     @Override
                     public void onNext(List<CardIssuer> issuers) {
+
+                        if(issuers.isEmpty())
+                            view.onCardIssuerError("No hay bancos disponibles");
+
                         cardIssuers = issuers;
                         view.onCardIssuerSuccess(cardIssuers);
                     }
