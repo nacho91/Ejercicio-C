@@ -10,4 +10,9 @@
     <string name="payment_retry_button">Reintentar</string>
     <string name="payment_next_button">Siguiente</string>
 
+    <string name="bank_title">Seleccione un banco</string>
+    <string name="bank_error">El banco es invalido</string>
+    <string name="bank_retry_button">Reintentar</string>
+    <string name="bank_next_button">Siguiente</string>
+
 </resources>

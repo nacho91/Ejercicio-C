@@ -47,7 +47,30 @@ public class DummyEjercicioCApi implements EjercicioCApi {
 
     @Override
     public List<CardIssuer> cardIssuers(String publicKey, String paymentMethodId) {
-        return null;
+        List<CardIssuer> cardIssuers = new ArrayList<>();
+
+        CardIssuer tarjetaShopping = new CardIssuer();
+        tarjetaShopping.setId("288");
+        tarjetaShopping.setName("Tarjeta Shopping");
+        tarjetaShopping.setSecureThumbnail("https://www.mercadopago.com/org-img/MP3/API/logos/288.gif");
+
+        cardIssuers.add(tarjetaShopping);
+
+        CardIssuer bancoGalicia = new CardIssuer();
+        bancoGalicia.setId("279");
+        bancoGalicia.setName("Banco Galicia");
+        bancoGalicia.setSecureThumbnail("https://www.mercadopago.com/org-img/MP3/API/logos/279.gif");
+
+        cardIssuers.add(bancoGalicia);
+
+        CardIssuer pagoFacil = new CardIssuer();
+        pagoFacil.setId("333");
+        pagoFacil.setName("Nuevo Banco de Santa Fe");
+        pagoFacil.setSecureThumbnail("https://www.mercadopago.com/org-img/MP3/API/logos/333.gif");
+
+        cardIssuers.add(pagoFacil);
+
+        return cardIssuers;
     }
 
     @Override

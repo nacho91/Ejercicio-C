@@ -17,6 +17,7 @@ import com.nacho91.ejercicioc.amount.AmountActivity;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.DummyEjercicioCApi;
 import com.nacho91.ejercicioc.R;
+import com.nacho91.ejercicioc.bank.BankActivity;
 import com.nacho91.ejercicioc.model.PaymentMethod;
 import com.nacho91.ejercicioc.payment.adapter.PaymentMethodAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -113,7 +114,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentView{
 
     @Override
     public void goBankScreen() {
-
+        startActivity(new Intent(this, BankActivity.class));
     }
 
     private void toggleVisiblityView(View view, boolean show){

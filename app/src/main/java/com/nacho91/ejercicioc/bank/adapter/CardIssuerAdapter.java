@@ -1,4 +1,4 @@
-package com.nacho91.ejercicioc.payment.adapter;
+package com.nacho91.ejercicioc.bank.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nacho91.ejercicioc.R;
+import com.nacho91.ejercicioc.model.CardIssuer;
 import com.nacho91.ejercicioc.model.PaymentMethod;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
 
 import java.util.List;
 
@@ -20,22 +20,21 @@ import java.util.List;
  * Created by Ignacio on 1/5/2017.
  */
 
-public class PaymentMethodAdapter extends BaseAdapter{
+public class CardIssuerAdapter extends BaseAdapter {
+    private List<CardIssuer> cardIssuers;
 
-    private List<PaymentMethod> payments;
-
-    public PaymentMethodAdapter(List<PaymentMethod> payments) {
-        this.payments = payments;
+    public CardIssuerAdapter(List<CardIssuer> payments) {
+        this.cardIssuers = payments;
     }
 
     @Override
     public int getCount() {
-        return payments.size();
+        return cardIssuers.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return payments.get(i);
+        return cardIssuers.get(i);
     }
 
     @Override
@@ -48,16 +47,16 @@ public class PaymentMethodAdapter extends BaseAdapter{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         if(convertView == null){
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_payment_method, parent, false);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_card_issuer, parent, false);
         }
 
-        PaymentMethod paymentMethod = payments.get(position);
+        CardIssuer cardIssuer = cardIssuers.get(position);
 
-        TextView paymentName = (TextView) convertView.findViewById(android.R.id.text1);
-        paymentName.setText(paymentMethod.getName());
+        TextView cardIssuerName = (TextView) convertView.findViewById(android.R.id.text1);
+        cardIssuerName.setText(cardIssuer.getName());
 
-        ImageView paymentImage = (ImageView) convertView.findViewById(R.id.adapter_payment_image);
-        ImageLoader.getInstance().displayImage(paymentMethod.getSecureThumbnail(), paymentImage);
+        ImageView cardIssuerImage = (ImageView) convertView.findViewById(R.id.adapter_card_issuer_image);
+        ImageLoader.getInstance().displayImage(cardIssuer.getSecureThumbnail(), cardIssuerImage);
 
         return convertView;
     }
