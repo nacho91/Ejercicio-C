@@ -14,8 +14,6 @@ import com.nacho91.ejercicioc.base.BaseListActivity;
 import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.model.PaymentMethod;
 import com.nacho91.ejercicioc.payment.adapter.PaymentMethodAdapter;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.List;
 
@@ -32,8 +30,6 @@ public class PaymentActivity extends BaseListActivity implements PaymentView{
         super.onCreate(savedInstanceState);
 
         setTitle(R.string.payment_title);
-
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
 
         EjercicioCApi api = ((EjercicioCApplication) getApplicationContext()).getApi();
         CacheManager cacheManager = ((EjercicioCApplication) getApplicationContext()).getCacheManager();

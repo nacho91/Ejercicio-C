@@ -8,6 +8,9 @@ import com.google.gson.GsonBuilder;
 import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.api.RxApiCallAdapterFactory;
 import com.nacho91.ejercicioc.cache.CacheManager;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,6 +31,18 @@ public class EjercicioCApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .resetViewBeforeLoading(true)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
+
+        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(options)
+                .build();
+
+        ImageLoader.getInstance().init(configuration);
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);

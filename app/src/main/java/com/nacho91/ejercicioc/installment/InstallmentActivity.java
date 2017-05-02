@@ -39,8 +39,6 @@ public class InstallmentActivity extends BaseListActivity implements Installment
         super.onCreate(savedInstanceState);
         setTitle(R.string.installemnt_title);
 
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
-
         EjercicioCApi api = ((EjercicioCApplication) getApplicationContext()).getApi();
         CacheManager cacheManager = ((EjercicioCApplication) getApplicationContext()).getCacheManager();
 
