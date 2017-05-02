@@ -3,11 +3,10 @@ package com.nacho91.ejercicioc.installment;
 import com.nacho91.ejercicioc.api.ApiError;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.ApiSubscriber;
-import com.nacho91.ejercicioc.model.CardIssuer;
+import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.model.Installment;
 import com.nacho91.ejercicioc.model.PayerCost;
 import com.nacho91.ejercicioc.model.PaymentInfo;
-import com.nacho91.ejercicioc.model.PaymentMethod;
 
 import java.util.List;
 
@@ -24,16 +23,19 @@ public class InstallmentPresenter {
 
     private ApiManager apiManager;
 
+    private CacheManager cacheManager;
+
     private Installment installment;
 
-    public InstallmentPresenter(InstallmentView view, ApiManager apiManager){
+    public InstallmentPresenter(InstallmentView view, ApiManager apiManager, CacheManager cacheManager){
         this.view = view;
         this.apiManager = apiManager;
+        this.cacheManager = cacheManager;
     }
 
     public void installment(){
 
-        PaymentInfo paymentInfo = getDummyPaymentInfo();
+        PaymentInfo paymentInfo = cacheManager.getPaymentInfo();
 
         apiManager.installment(paymentInfo)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -60,27 +62,10 @@ public class InstallmentPresenter {
             return;
         }
 
-        PayerCost cardIssuer = installment.getPayerCosts().get(payerCostPos);
+        PayerCost payerCost = installment.getPayerCosts().get(payerCostPos);
+
+        cacheManager.savePayerCost(payerCost);
 
         view.finishProcess();
-    }
-
-    private PaymentInfo getDummyPaymentInfo(){
-        PaymentInfo paymentInfo = new PaymentInfo();
-        paymentInfo.setAmount(200);
-
-        PaymentMethod paymentMethod = new PaymentMethod();
-        paymentMethod.setId("visa");
-        paymentMethod.setTypeId("credit_card");
-
-        paymentInfo.setPaymentMethod(paymentMethod);
-
-        CardIssuer cardIssuer = new CardIssuer();
-        cardIssuer.setId("303");
-        cardIssuer.setName("Banco Galicia");
-
-        paymentInfo.setCardIssuer(cardIssuer);
-
-        return paymentInfo;
     }
 }

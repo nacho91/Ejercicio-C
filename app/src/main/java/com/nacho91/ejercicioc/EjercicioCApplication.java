@@ -1,11 +1,13 @@
 package com.nacho91.ejercicioc;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.api.RxApiCallAdapterFactory;
+import com.nacho91.ejercicioc.cache.CacheManager;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -20,6 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EjercicioCApplication extends Application {
 
     private EjercicioCApi api;
+
+    private CacheManager cacheManager;
 
     @Override
     public void onCreate() {
@@ -45,9 +49,16 @@ public class EjercicioCApplication extends Application {
                 .build();
 
         api = retrofit.create(EjercicioCApi.class);
+
+        SharedPreferences preferences = getSharedPreferences("_CACHE_", MODE_PRIVATE);
+        cacheManager = new CacheManager(preferences);
     }
 
     public EjercicioCApi getApi(){
         return api;
+    }
+
+    public CacheManager getCacheManager(){
+        return cacheManager;
     }
 }

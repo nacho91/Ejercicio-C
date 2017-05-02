@@ -3,6 +3,7 @@ package com.nacho91.ejercicioc.bank;
 import com.nacho91.ejercicioc.api.ApiError;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.ApiSubscriber;
+import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.model.CardIssuer;
 import com.nacho91.ejercicioc.model.PaymentInfo;
 import com.nacho91.ejercicioc.model.PaymentMethod;
@@ -23,16 +24,19 @@ public class BankPresenter {
 
     private ApiManager apiManager;
 
+    private CacheManager cacheManager;
+
     private List<CardIssuer> cardIssuers;
 
-    public BankPresenter(BankView view, ApiManager apiManager){
+    public BankPresenter(BankView view, ApiManager apiManager, CacheManager cacheManager){
         this.view = view;
         this.apiManager = apiManager;
+        this.cacheManager = cacheManager;
     }
 
     public void cardIssuers(){
 
-        PaymentInfo paymentInfo = getDummyPaymentInfo();
+        PaymentInfo paymentInfo = cacheManager.getPaymentInfo();
 
         apiManager.cardIssuers(paymentInfo)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,19 +65,8 @@ public class BankPresenter {
 
         CardIssuer cardIssuer = cardIssuers.get(cardIssuerPos);
 
+        cacheManager.saveCardIssuer(cardIssuer);
+
         view.goInstallmentScreen();
-    }
-
-    private PaymentInfo getDummyPaymentInfo(){
-        PaymentInfo paymentInfo = new PaymentInfo();
-        paymentInfo.setAmount(200);
-
-        PaymentMethod paymentMethod = new PaymentMethod();
-        paymentMethod.setId("visa");
-        paymentMethod.setTypeId("credit_card");
-
-        paymentInfo.setPaymentMethod(paymentMethod);
-
-        return paymentInfo;
     }
 }

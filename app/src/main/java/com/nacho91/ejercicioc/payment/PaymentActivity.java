@@ -19,6 +19,7 @@ import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.R;
 import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.bank.BankActivity;
+import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.model.PaymentMethod;
 import com.nacho91.ejercicioc.payment.adapter.PaymentMethodAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -50,8 +51,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentView{
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
 
         EjercicioCApi api = ((EjercicioCApplication) getApplicationContext()).getApi();
+        CacheManager cacheManager = ((EjercicioCApplication) getApplicationContext()).getCacheManager();
 
-        presenter = new PaymentPresenter(this, new ApiManager(api));
+        presenter = new PaymentPresenter(this, new ApiManager(api), cacheManager);
 
         initControls();
         setListeners();

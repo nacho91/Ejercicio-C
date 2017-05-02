@@ -18,6 +18,7 @@ import com.nacho91.ejercicioc.R;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.bank.adapter.CardIssuerAdapter;
+import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.installment.InstallmentActivity;
 import com.nacho91.ejercicioc.model.CardIssuer;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -49,8 +50,9 @@ public class BankActivity extends AppCompatActivity implements BankView{
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
 
         EjercicioCApi api = ((EjercicioCApplication) getApplicationContext()).getApi();
+        CacheManager cacheManager = ((EjercicioCApplication) getApplicationContext()).getCacheManager();
 
-        presenter = new BankPresenter(this, new ApiManager(api));
+        presenter = new BankPresenter(this, new ApiManager(api), cacheManager);
 
         initControls();
         setListeners();

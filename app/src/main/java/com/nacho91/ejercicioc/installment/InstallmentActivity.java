@@ -18,6 +18,7 @@ import com.nacho91.ejercicioc.R;
 import com.nacho91.ejercicioc.amount.AmountActivity;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.EjercicioCApi;
+import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.installment.adapter.PayerCostAdapter;
 import com.nacho91.ejercicioc.model.Installment;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -48,8 +49,9 @@ public class InstallmentActivity extends AppCompatActivity implements Installmen
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
 
         EjercicioCApi api = ((EjercicioCApplication) getApplicationContext()).getApi();
+        CacheManager cacheManager = ((EjercicioCApplication) getApplicationContext()).getCacheManager();
 
-        presenter = new InstallmentPresenter(this, new ApiManager(api));
+        presenter = new InstallmentPresenter(this, new ApiManager(api), cacheManager);
 
         initControls();
         setListeners();

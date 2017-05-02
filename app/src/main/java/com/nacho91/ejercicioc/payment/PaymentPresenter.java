@@ -3,6 +3,7 @@ package com.nacho91.ejercicioc.payment;
 import com.nacho91.ejercicioc.api.ApiError;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.ApiSubscriber;
+import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.model.PaymentMethod;
 
 import java.util.List;
@@ -21,11 +22,14 @@ public class PaymentPresenter {
 
     private ApiManager apiManager;
 
+    private CacheManager cacheManager;
+
     private List<PaymentMethod> payments;
 
-    public PaymentPresenter(PaymentView view, ApiManager apiManager){
+    public PaymentPresenter(PaymentView view, ApiManager apiManager, CacheManager cacheManager){
         this.view = view;
         this.apiManager = apiManager;
+        this.cacheManager = cacheManager;
     }
 
     public void payments(){
@@ -56,6 +60,8 @@ public class PaymentPresenter {
         }
 
         PaymentMethod paymentMethod = payments.get(paymentMethodPos);
+
+        cacheManager.savePaymentMethod(paymentMethod);
 
         if(isCreditCardMethod(paymentMethod)){
             view.goBankScreen();

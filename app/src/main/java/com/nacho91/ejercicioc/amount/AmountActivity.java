@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.nacho91.ejercicioc.EjercicioCApplication;
 import com.nacho91.ejercicioc.R;
+import com.nacho91.ejercicioc.api.EjercicioCApi;
+import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.payment.PaymentActivity;
 
 /**
@@ -30,7 +33,9 @@ public class AmountActivity extends AppCompatActivity implements AmountView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amount);
 
-        presenter = new AmountPresenter(this);
+        CacheManager cacheManager = ((EjercicioCApplication) getApplicationContext()).getCacheManager();
+
+        presenter = new AmountPresenter(this, cacheManager);
 
         initControls();
         setListeners();
