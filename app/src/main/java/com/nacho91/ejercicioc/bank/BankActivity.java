@@ -18,6 +18,7 @@ import com.nacho91.ejercicioc.R;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.bank.adapter.CardIssuerAdapter;
+import com.nacho91.ejercicioc.base.BaseListActivity;
 import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.installment.InstallmentActivity;
 import com.nacho91.ejercicioc.model.CardIssuer;
@@ -30,20 +31,13 @@ import java.util.List;
  * Created by Ignacio on 1/5/2017.
  */
 
-public class BankActivity extends AppCompatActivity implements BankView{
-
-    private CoordinatorLayout bankRoot;
-    private RelativeLayout bankContainer;
-    private ListView bankList;
-    private Button nextButton;
-    private ProgressBar progress;
+public class BankActivity extends BaseListActivity implements BankView{
 
     private BankPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bank);
 
         setTitle(R.string.bank_title);
 
@@ -54,27 +48,16 @@ public class BankActivity extends AppCompatActivity implements BankView{
 
         presenter = new BankPresenter(this, new ApiManager(api), cacheManager);
 
-        initControls();
-        setListeners();
-
-        toggleVisiblityView(bankContainer, false);
     }
 
-    private void initControls(){
-        bankRoot = (CoordinatorLayout) findViewById(R.id.bank_root);
-        bankContainer = (RelativeLayout) findViewById(R.id.bank_container);
-        bankList = (ListView) findViewById(R.id.bank_list);
-        nextButton = (Button) findViewById(R.id.bank_next_button);
-        progress = (ProgressBar) findViewById(R.id.bank_progress);
+    @Override
+    public void onNextButtonPressed() {
+        presenter.saveCardIssuer(getCheckedPosition());
     }
 
-    private void setListeners(){
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.saveCardIssuer(bankList.getCheckedItemPosition());
-            }
-        });
+    @Override
+    public void onRetryButtonPressed() {
+        presenter.cardIssuers();
     }
 
     @Override
@@ -85,36 +68,21 @@ public class BankActivity extends AppCompatActivity implements BankView{
 
     @Override
     public void onCardIssuerSuccess(List<CardIssuer> cardIssuers) {
-        toggleVisiblityView(progress, false);
-        toggleVisiblityView(bankContainer, true);
-
-        bankList.setAdapter(new CardIssuerAdapter(cardIssuers));
+        setListAdapter(new CardIssuerAdapter(cardIssuers));
     }
 
     @Override
     public void onCardIssuerError(String error) {
-        Snackbar.make(bankRoot, error, BaseTransientBottomBar.LENGTH_INDEFINITE)
-                .setAction(R.string.bank_retry_button, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        toggleVisiblityView(bankContainer, false);
-                        toggleVisiblityView(progress, true);
-                        presenter.cardIssuers();
-                    }
-                }).show();
+        showRetryError(error, getString(R.string.bank_retry_button));
     }
 
     @Override
     public void invalidCardIssuer() {
-        Snackbar.make(bankRoot, R.string.bank_error, BaseTransientBottomBar.LENGTH_SHORT).show();
+        showError(getString(R.string.bank_error));
     }
 
     @Override
     public void goInstallmentScreen() {
         startActivity(new Intent(this, InstallmentActivity.class));
-    }
-
-    private void toggleVisiblityView(View view, boolean show){
-        view.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 }
