@@ -36,6 +36,9 @@ public class BankPresenter {
 
     public void cardIssuers(){
 
+        if(cardIssuers != null)
+            return;
+
         PaymentInfo paymentInfo = cacheManager.getPaymentInfo();
 
         apiManager.cardIssuers(paymentInfo)

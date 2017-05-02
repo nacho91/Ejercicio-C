@@ -35,6 +35,9 @@ public class InstallmentPresenter {
 
     public void installment(){
 
+        if(installment != null)
+            return;
+
         PaymentInfo paymentInfo = cacheManager.getPaymentInfo();
 
         apiManager.installment(paymentInfo)

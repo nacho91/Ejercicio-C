@@ -33,6 +33,10 @@ public class PaymentPresenter {
     }
 
     public void payments(){
+
+        if(payments != null)
+            return;
+
         apiManager.paymentMethods()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
