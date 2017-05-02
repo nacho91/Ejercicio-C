@@ -6,15 +6,27 @@ import com.nacho91.ejercicioc.model.PaymentMethod;
 
 import java.util.List;
 
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Query;
+import rx.Observable;
+
 /**
  * Created by Ignacio on 29/4/2017.
  */
 
 public interface EjercicioCApi {
 
-    List<PaymentMethod> paymentMethods(String publicKey);
+    @GET("./")
+    Observable<List<PaymentMethod>> paymentMethods(@Query("public_key") String publicKey);
 
-    List<CardIssuer> cardIssuers(String publicKey, String paymentMethodId);
+    @GET("card_issuers")
+    Observable<List<CardIssuer>> cardIssuers(@Query("public_key")String publicKey,
+                                 @Query("payment_method_id") String paymentMethodId);
 
-    Installment installment(String publicKey, String paymentMethodId, String issuerId, String amount);
+    @GET("installments")
+    Observable<List<Installment>> installment(@Query("public_key")String publicKey,
+                            @Query("payment_method_id")String paymentMethodId,
+                            @Query("issuer.id")String issuerId,
+                            @Query("amount")String amount);
 }

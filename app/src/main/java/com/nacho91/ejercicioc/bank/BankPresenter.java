@@ -1,11 +1,17 @@
 package com.nacho91.ejercicioc.bank;
 
+import com.nacho91.ejercicioc.api.ApiError;
 import com.nacho91.ejercicioc.api.ApiManager;
+import com.nacho91.ejercicioc.api.ApiSubscriber;
 import com.nacho91.ejercicioc.model.CardIssuer;
 import com.nacho91.ejercicioc.model.PaymentInfo;
 import com.nacho91.ejercicioc.model.PaymentMethod;
 
 import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Ignacio on 1/5/2017.
@@ -28,13 +34,23 @@ public class BankPresenter {
 
         PaymentInfo paymentInfo = getDummyPaymentInfo();
 
-        cardIssuers = apiManager.cardIssuers(paymentInfo);
+        apiManager.cardIssuers(paymentInfo)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new ApiSubscriber<List<CardIssuer>>() {
 
-        if(cardIssuers == null){
-            view.onCardIssuerError("");
-        }
+                    @Override
+                    public void onHttpError(ApiError error) {
+                        super.onHttpError(error);
+                        view.onCardIssuerError(error.getCauseMessage());
+                    }
 
-        view.onCardIssuerSuccess(cardIssuers);
+                    @Override
+                    public void onNext(List<CardIssuer> issuers) {
+                        cardIssuers = issuers;
+                        view.onCardIssuerSuccess(cardIssuers);
+                    }
+                });
     }
 
     public void saveCardIssuer(int cardIssuerPos){
@@ -53,7 +69,7 @@ public class BankPresenter {
         paymentInfo.setAmount(200);
 
         PaymentMethod paymentMethod = new PaymentMethod();
-        paymentMethod.setId("vidsa");
+        paymentMethod.setId("visa");
         paymentMethod.setTypeId("credit_card");
 
         paymentInfo.setPaymentMethod(paymentMethod);

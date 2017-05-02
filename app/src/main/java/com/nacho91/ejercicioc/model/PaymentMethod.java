@@ -1,5 +1,7 @@
 package com.nacho91.ejercicioc.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Ignacio on 29/4/2017.
  */
@@ -10,8 +12,10 @@ public class PaymentMethod {
 
     private String name;
 
+    @SerializedName("secure_thumbnail")
     private String secureThumbnail;
 
+    @SerializedName("payment_type_id")
     private String typeId;
 
     public PaymentMethod(){}

@@ -13,10 +13,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.nacho91.ejercicioc.EjercicioCApplication;
 import com.nacho91.ejercicioc.R;
 import com.nacho91.ejercicioc.amount.AmountActivity;
 import com.nacho91.ejercicioc.api.ApiManager;
-import com.nacho91.ejercicioc.api.DummyEjercicioCApi;
+import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.installment.adapter.PayerCostAdapter;
 import com.nacho91.ejercicioc.model.Installment;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -46,7 +47,9 @@ public class InstallmentActivity extends AppCompatActivity implements Installmen
 
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
 
-        presenter = new InstallmentPresenter(this, new ApiManager(new DummyEjercicioCApi()));
+        EjercicioCApi api = ((EjercicioCApplication) getApplicationContext()).getApi();
+
+        presenter = new InstallmentPresenter(this, new ApiManager(api));
 
         initControls();
         setListeners();

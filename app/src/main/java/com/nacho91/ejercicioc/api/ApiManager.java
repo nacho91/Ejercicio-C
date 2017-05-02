@@ -8,6 +8,8 @@ import com.nacho91.ejercicioc.model.PaymentMethod;
 
 import java.util.List;
 
+import rx.Observable;
+
 /**
  * Created by Ignacio on 29/4/2017.
  */
@@ -20,16 +22,16 @@ public class ApiManager {
         this.ejercicioCApi = ejercicioCApi;
     }
 
-    public List<PaymentMethod> paymentMethods(){
+    public Observable<List<PaymentMethod>> paymentMethods(){
         return ejercicioCApi.paymentMethods(BuildConfig.PUBLIC_KEY);
     }
 
-    public List<CardIssuer> cardIssuers(PaymentInfo info){
+    public Observable<List<CardIssuer>> cardIssuers(PaymentInfo info){
         return ejercicioCApi.cardIssuers(BuildConfig.PUBLIC_KEY,
                 info.getPaymentMethod().getId());
     }
 
-    public Installment installment(PaymentInfo info){
+    public Observable<List<Installment>> installment(PaymentInfo info){
         return ejercicioCApi.installment(BuildConfig.PUBLIC_KEY,
                 info.getPaymentMethod().getId(),
                 info.getCardIssuer().getId(),

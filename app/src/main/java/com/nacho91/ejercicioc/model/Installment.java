@@ -1,5 +1,7 @@
 package com.nacho91.ejercicioc.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,7 @@ public class Installment {
 
     private CardIssuer cardIssuer;
 
+    @SerializedName("payer_costs")
     private List<PayerCost> payerCosts;
 
     public Installment(){}

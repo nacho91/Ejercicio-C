@@ -13,9 +13,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.nacho91.ejercicioc.EjercicioCApplication;
 import com.nacho91.ejercicioc.R;
 import com.nacho91.ejercicioc.api.ApiManager;
-import com.nacho91.ejercicioc.api.DummyEjercicioCApi;
+import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.bank.adapter.CardIssuerAdapter;
 import com.nacho91.ejercicioc.installment.InstallmentActivity;
 import com.nacho91.ejercicioc.model.CardIssuer;
@@ -47,7 +48,9 @@ public class BankActivity extends AppCompatActivity implements BankView{
 
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
 
-        presenter = new BankPresenter(this, new ApiManager(new DummyEjercicioCApi()));
+        EjercicioCApi api = ((EjercicioCApplication) getApplicationContext()).getApi();
+
+        presenter = new BankPresenter(this, new ApiManager(api));
 
         initControls();
         setListeners();
