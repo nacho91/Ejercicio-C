@@ -2,6 +2,7 @@ package com.nacho91.ejercicioc.api;
 
 import com.nacho91.ejercicioc.model.CardIssuer;
 import com.nacho91.ejercicioc.model.Installment;
+import com.nacho91.ejercicioc.model.PayerCost;
 import com.nacho91.ejercicioc.model.PaymentMethod;
 
 import java.util.ArrayList;
@@ -75,6 +76,18 @@ public class DummyEjercicioCApi implements EjercicioCApi {
 
     @Override
     public Installment installment(String publicKey, String paymentMethodId, String issuerId, String amount) {
-        return null;
+
+        Installment installment = new Installment();
+
+        List<PayerCost> payerCosts = new ArrayList<>();
+
+        PayerCost payerCost = new PayerCost();
+        payerCost.setRecommendedMessage("1 cuota de $ 1.340,00 ($ 1.340,00)");
+
+        payerCosts.add(payerCost);
+
+        installment.setPayerCosts(payerCosts);
+
+        return installment;
     }
 }

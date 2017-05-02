@@ -21,6 +21,7 @@
 
         <activity android:name=".payment.PaymentActivity"/>
         <activity android:name=".bank.BankActivity"/>
+        <activity android:name=".installment.InstallmentActivity"/>
     </application>
 
 </manifest>

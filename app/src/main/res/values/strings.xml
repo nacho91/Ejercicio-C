@@ -15,4 +15,9 @@
     <string name="bank_retry_button">Reintentar</string>
     <string name="bank_next_button">Siguiente</string>
 
+    <string name="installemnt_title">Seleccione las cuotas</string>
+    <string name="installemnt_error">Las cuotas son invalidos</string>
+    <string name="installemnt_retry_button">Reintentar</string>
+    <string name="installemnt_next_button">Siguiente</string>
+
 </resources>

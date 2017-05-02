@@ -1,5 +1,6 @@
 package com.nacho91.ejercicioc.bank;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -16,6 +17,7 @@ import com.nacho91.ejercicioc.R;
 import com.nacho91.ejercicioc.api.ApiManager;
 import com.nacho91.ejercicioc.api.DummyEjercicioCApi;
 import com.nacho91.ejercicioc.bank.adapter.CardIssuerAdapter;
+import com.nacho91.ejercicioc.installment.InstallmentActivity;
 import com.nacho91.ejercicioc.model.CardIssuer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -104,7 +106,7 @@ public class BankActivity extends AppCompatActivity implements BankView{
 
     @Override
     public void goInstallmentScreen() {
-
+        startActivity(new Intent(this, InstallmentActivity.class));
     }
 
     private void toggleVisiblityView(View view, boolean show){
