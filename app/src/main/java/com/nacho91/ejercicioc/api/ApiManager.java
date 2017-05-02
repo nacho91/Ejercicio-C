@@ -1,6 +1,6 @@
 package com.nacho91.ejercicioc.api;
 
-import com.nacho91.ejercicioc.ejercicioc.BuildConfig;
+import com.nacho91.ejercicioc.BuildConfig;
 import com.nacho91.ejercicioc.model.CardIssuer;
 import com.nacho91.ejercicioc.model.Installment;
 import com.nacho91.ejercicioc.model.PaymentInfo;

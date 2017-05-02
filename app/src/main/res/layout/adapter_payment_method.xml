@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nacho91.ejercicioc.widget.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeightSmall"
+    android:background="@android:color/transparent">
+
+        <CheckBox
+            android:id="@+id/adapter_payment_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="false"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+
+        <ImageView
+            android:id="@+id/adapter_payment_image"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:textSize="16sp"
+            android:paddingRight="5dp"
+            android:layout_centerVertical="true"
+            android:focusable="false"
+            android:layout_toRightOf="@+id/adapter_payment_check"
+            />
+
+        <TextView
+            android:id="@android:id/text1"
+            android:focusable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/adapter_payment_image" />
+
+</com.nacho91.ejercicioc.widget.CheckableRelativeLayout>

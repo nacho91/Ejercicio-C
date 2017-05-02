@@ -4,4 +4,10 @@
     <string name="amount_label">Ingrese un monto</string>
     <string name="amount_error">El monto ingresado es invalido</string>
     <string name="amount_next_button">Siguiente</string>
+
+    <string name="payment_title">Seleccione un método de pago</string>
+    <string name="payment_error">El método de pago es invalido</string>
+    <string name="payment_retry_button">Reintentar</string>
+    <string name="payment_next_button">Siguiente</string>
+
 </resources>

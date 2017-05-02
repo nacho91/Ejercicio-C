@@ -1,5 +1,6 @@
 package com.nacho91.ejercicioc.amount;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.nacho91.ejercicioc.ejercicioc.R;
+import com.nacho91.ejercicioc.R;
+import com.nacho91.ejercicioc.payment.PaymentActivity;
 
 /**
  * Created by Ignacio on 1/5/2017.
@@ -68,6 +70,6 @@ public class AmountActivity extends AppCompatActivity implements AmountView{
 
     @Override
     public void goPaymentMethod() {
-
+        startActivity(new Intent(this, PaymentActivity.class));
     }
 }
