@@ -3,6 +3,7 @@ package com.nacho91.ejercicioc.amount;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 
 import com.nacho91.ejercicioc.EjercicioCApplication;
 import com.nacho91.ejercicioc.R;
-import com.nacho91.ejercicioc.api.EjercicioCApi;
 import com.nacho91.ejercicioc.cache.CacheManager;
 import com.nacho91.ejercicioc.payment.PaymentActivity;
 
@@ -22,6 +22,8 @@ import com.nacho91.ejercicioc.payment.PaymentActivity;
  */
 
 public class AmountActivity extends AppCompatActivity implements AmountView{
+
+    public static final String COMPLETE_FLAG = "_COMPLETE_";
 
     private EditText amountText;
     private Button nextButton;
@@ -39,6 +41,11 @@ public class AmountActivity extends AppCompatActivity implements AmountView{
 
         initControls();
         setListeners();
+
+        if(getIntent().getExtras() != null &&
+                getIntent().getExtras().containsKey(COMPLETE_FLAG)){
+            showSelectedValues();
+        }
     }
 
     private void initControls(){
@@ -66,6 +73,12 @@ public class AmountActivity extends AppCompatActivity implements AmountView{
                 presenter.saveAmount(amountText.getText().toString());
             }
         });
+    }
+
+    private void showSelectedValues(){
+        new AlertDialog.Builder(this)
+                .setMessage(presenter.getSelectedValues())
+                .create().show();
     }
 
     @Override

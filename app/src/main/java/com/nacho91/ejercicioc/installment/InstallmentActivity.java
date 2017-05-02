@@ -111,6 +111,7 @@ public class InstallmentActivity extends AppCompatActivity implements Installmen
     @Override
     public void finishProcess() {
         Intent intent = new Intent(this, AmountActivity.class);
+        intent.putExtra(AmountActivity.COMPLETE_FLAG, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
