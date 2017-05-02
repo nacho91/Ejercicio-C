@@ -90,7 +90,7 @@ public class InstallmentActivity extends AppCompatActivity implements Installmen
 
     @Override
     public void onInstallmentError(String error) {
-        Snackbar.make(installmentRoot, error, BaseTransientBottomBar.LENGTH_SHORT)
+        Snackbar.make(installmentRoot, error, BaseTransientBottomBar.LENGTH_INDEFINITE)
                 .setAction(R.string.installemnt_retry_button, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

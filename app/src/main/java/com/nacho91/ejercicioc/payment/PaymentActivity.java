@@ -92,7 +92,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentView{
 
     @Override
     public void onPaymentError(String error) {
-        Snackbar.make(paymentRoot, error, BaseTransientBottomBar.LENGTH_SHORT)
+        Snackbar.make(paymentRoot, error, BaseTransientBottomBar.LENGTH_INDEFINITE)
                 .setAction(R.string.payment_retry_button, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

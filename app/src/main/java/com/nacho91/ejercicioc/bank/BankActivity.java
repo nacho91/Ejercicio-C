@@ -91,7 +91,7 @@ public class BankActivity extends AppCompatActivity implements BankView{
 
     @Override
     public void onCardIssuerError(String error) {
-        Snackbar.make(bankRoot, error, BaseTransientBottomBar.LENGTH_SHORT)
+        Snackbar.make(bankRoot, error, BaseTransientBottomBar.LENGTH_INDEFINITE)
                 .setAction(R.string.bank_retry_button, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
